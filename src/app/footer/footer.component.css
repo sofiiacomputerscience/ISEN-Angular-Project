@@ -1,0 +1,7 @@
+.jumbotron {
+    padding: 2rem 1rem;
+    background-color: #F2D4D6;
+    
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    color: #01257D; 
+    transition: all 0.3s ease-in-out;}
