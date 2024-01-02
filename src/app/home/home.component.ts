@@ -12,4 +12,7 @@ export class HomeComponent {
  constructor(private titleService: Title){
   this.titleService.setTitle("Home - ISEN Angular");
  }
+
+  shouldSpin = true;
+
 }
