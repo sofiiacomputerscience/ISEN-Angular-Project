@@ -1,0 +1,13 @@
+<div class="srchBar">
+    <form [formGroup]="searchForm">
+        Enter a film's name : <input formControlName="search" placeholder="search...">
+    </form>
+    <div *ngIf="showErrorMessage" class="error-message">You need at least 3 letters to execute the research...</div>
+</div>
+<div class="results">
+    <ng-container *ngIf="filtredFilms.length > 0">
+        <div class="col-3" *ngFor="let item of filtredFilms">
+            <app-list-films-result [rslt_films]="item" (eventOut)="onEvent($event)"></app-list-films-result>
+        </div>
+    </ng-container>
+</div>
