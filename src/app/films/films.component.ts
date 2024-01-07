@@ -20,6 +20,7 @@ export class FilmsComponent implements OnInit {
     searchControl: FormControl<string>
 
     showErrorMessage: boolean = false;
+    currentPage: number = 1;
 
     constructor(private DataService: DataService) {
       this.searchControl = new FormControl<string>(
@@ -36,7 +37,7 @@ export class FilmsComponent implements OnInit {
   
     ngOnInit(): void {
 
-      this.DataService.getFilms('abc').subscribe(
+      this.DataService.getFilms('abc', this.currentPage).subscribe(
         (data: any[]) => {
           this.allFilms = data
         }
@@ -47,7 +48,8 @@ export class FilmsComponent implements OnInit {
         switchMap((value: string) => {
           if (value.length >= 3) {
             this.showErrorMessage = false;
-            return this.DataService.getFilmsContains(value);
+            this.currentPage = 1;
+            return this.DataService.getFilmsContains(value, this.currentPage);
           } else {
             this.showErrorMessage = true;
             return [];
@@ -57,8 +59,27 @@ export class FilmsComponent implements OnInit {
         (films: Films[]) => this.filtredFilms = films
       );
     }
+    
+    onNextPage(): void {
+      this.currentPage++;
+      const searchTerm = this.searchControl.value;
+      console.log(searchTerm);
+      this.DataService.getFilmsContains(searchTerm, this.currentPage).subscribe(
+        (films: Films[]) => this.filtredFilms = films
+        );
+    }
 
+    onPreviousPage(): void {
+      if (this.currentPage > 1) {
+        this.currentPage--;
+        const searchTerm = this.searchControl.value;
+        console.log(searchTerm);
+        this.DataService.getFilmsContains(searchTerm, this.currentPage).subscribe(
+        (films: Films[]) => this.filtredFilms = films
+        );
+      }
+    }
     onEvent = (event: any) => {
-      this.lastFilm = event
-  }
+      this.lastFilm = event;
+    }
 }

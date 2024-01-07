@@ -13,8 +13,10 @@ export class DataService {
 
   constructor(private http: HttpClient) { }
 
-  getFilms(srch: string): Observable<Films[]> {
-    return this.http.get(this.BaseURL + 'apikey=' + this.apiKey + '&s=' + srch + "*").pipe(
+
+  getFilms(srch: string, page: number ): Observable<Films[]> {
+    console.log(this.BaseURL + 'apikey=' + this.apiKey + '&s=' + srch + "*" + '&page=' + page);
+    return this.http.get(this.BaseURL + 'apikey=' + this.apiKey + '&s=' + srch + "*" + '&page=' + page).pipe(
       map( (data: any) => data.Search.map( (item: any) => {
         return {
           Title: item.Title,
@@ -27,8 +29,8 @@ export class DataService {
     ))
   }
 
-  getFilmsContains(srch: string): Observable<Films[]> {
-    return this.getFilms(srch);
+  getFilmsContains(srch: string, page: number): Observable<Films[]> {
+    return this.getFilms(srch, page);
   }
 
   getbyID(id: string): Observable<Films> {
