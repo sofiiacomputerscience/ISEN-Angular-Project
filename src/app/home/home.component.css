@@ -1,0 +1,24 @@
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  
+.spin {
+    animation: spin 40s linear infinite;
+  }
+  
+p {
+    color: #007bff; 
+    margin-bottom: 20px;
+    font-size: 1.1em; 
+    line-height: 1.6; 
+    max-width: 800px; 
+    margin: auto; 
+}
+
+.text-container {
+    padding: 20px;
+  }
+  
+
+

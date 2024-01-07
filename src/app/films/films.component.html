@@ -1,0 +1,31 @@
+<div class="srchBar">
+    <form [formGroup]="searchForm">
+        Enter a film's name : <input formControlName="search" placeholder="search...">
+    </form>
+    <div *ngIf="showErrorMessage" class="error-message">You need at least 3 letters to execute the research...</div>
+</div>
+
+<div class="padding-25 bg-color-1">
+    <div class="row">
+        <div *ngIf="filtredFilms.length > 0"  class="col-12 d-flex justify-content-center f-large padding-b-25">
+            <span class="titre">All the films</span>
+        </div>
+        <div class="col-12 results">
+            <ng-container *ngIf="filtredFilms.length > 0">
+                <div class="row">
+                    <div class="col-md-4" *ngFor="let item of filtredFilms">
+                        <app-list-films-result [rslt_films]="item" (eventOut)="onEvent($event)"></app-list-films-result>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>
+
+<!-- Pagination Controls -->
+<div *ngIf="filtredFilms.length > 0" class="pagination-controls">
+    <button (click)="onPreviousPage()" [disabled]="currentPage <= 1">Previous</button>
+    <span>Page {{currentPage}}</span>
+    <button (click)="onNextPage()">Next</button>
+</div>
+
