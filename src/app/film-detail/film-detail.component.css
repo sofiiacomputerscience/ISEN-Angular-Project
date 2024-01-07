@@ -1,0 +1,64 @@
+.film-container {
+    color: #1a1a1a;
+    background-color: #F5F5DC ;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 1200px;
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.col-md-4, .col-md-8 {
+    padding: 15px;
+}
+
+.film-poster {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.film-poster:hover {
+    transform: scale(1.05);
+}
+
+.label {
+    color: #F5C518;
+    font-weight: bold;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.film-plot {
+    background: linear-gradient(to right, #1f2f98, #1a1a1a);
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+
+.rating-source {
+    color: #D4AF37;
+}
+
+.rating-value {
+    color: #C0C0C0;
+    font-weight: 500;
+}
+
+p {
+    line-height: 1.6;
+    font-size: 1.1em;
+}
+h5{
+    color: #D4AF37;
+}

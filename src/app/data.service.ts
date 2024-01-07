@@ -9,32 +9,39 @@ import { Films } from './films.interface';
 export class DataService {
 
   BaseURL = 'http://www.omdbapi.com/?';
-  apiKey = '700bbca8';                                      // apiKey to get from this link : "https://www.omdbapi.com/apikey.aspx"
+  apiKey = 'XXX';                // apiKey to get from this link : "https://www.omdbapi.com/apikey.aspx"
 
   constructor(private http: HttpClient) { }
 
-
-  getFilms(srch: string, page: number ): Observable<Films[]> {
+// Fetches films based on a search string and page number.
+  getFilms(srch: string, page: number ): Observable<any> {
     console.log(this.BaseURL + 'apikey=' + this.apiKey + '&s=' + srch + "*" + '&page=' + page);
     return this.http.get(this.BaseURL + 'apikey=' + this.apiKey + '&s=' + srch + "*" + '&page=' + page).pipe(
-      map( (data: any) => data.Search.map( (item: any) => {
-        return {
+      map( (data: any) => {
+         // Transforming the raw data into a more usable format.
+        const films = data.Search.map( (item: any) => ({
           Title: item.Title,
           Year: item.Year,
           imdbID: item.imdbID,
           Type: item.Type,
           Poster: item.Poster
-        }
+        }));
+
+        // Parsing total results to a number for easier handling.
+        const totalResults = parseInt(data.totalResults, 10);
+        return { films, totalResults }
       })
-    ))
+    );
   }
 
-  getFilmsContains(srch: string, page: number): Observable<Films[]> {
+  getFilmsContains(srch: string, page: number): Observable<any> {
     return this.getFilms(srch, page);
   }
-
+// Fetches details of a film by its IMDb ID.
   getbyID(id: string): Observable<Films> {
-    
+
+     // Logging the URL for debugging purposes.
+    console.log(this.BaseURL + 'apikey=' + this.apiKey + '&i=' + id);
     return this.http.get(this.BaseURL + 'apikey=' + this.apiKey + '&i=' + id).pipe(
       map( (data: any) => {
         return {
@@ -51,10 +58,15 @@ export class DataService {
           Country: data.Country,
           Awards: data.Awards,
           Production: data.Production,
-          Website: data.Website
+          Website: data.Website, 
+          Released: data.Released,
+          imbdRating: data.imdbRating,
+          Runtime: data.Runtime
+  
         }
       }),
       catchError((error: any) => {
+         // Logging and handling errors.
         console.error('Error fetching films:', error);
         return [];
       })

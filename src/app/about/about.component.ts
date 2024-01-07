@@ -7,7 +7,7 @@ import { Title } from '@angular/platform-browser';
 })
 export class AboutComponent {
 
-  // Using service from angular platform-browser
+  // Set the page title.
   constructor(private titleService: Title){
     this.titleService.setTitle("About - ISEN Angular");
    }

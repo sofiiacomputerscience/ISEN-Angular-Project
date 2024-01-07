@@ -2,7 +2,7 @@
     margin-bottom: 20px;
     text-align: center; 
     padding: 20px;
-    background-color: #F5C518; 
+    background-color: #F5F5DC; 
     border-radius: 10px; 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
     max-width: 600px; 
@@ -25,14 +25,49 @@
 }
 
 
-.results .col-md-4 {
+.results .col-md-6 {
     padding: 12px; 
-}
 
+}
 .app-list-films-result {
-    border: 1px solid #ddd; 
+    border: 1px solid #ddd;
     padding: 10px;
     margin-bottom: 20px; 
-    background-color: white; 
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
+.pagination-controls {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .pagination-controls button {
+    padding: 10px 15px;
+    margin: 0 5px;
+    border: none;
+    background-color: #4B0082; 
+    color: #D4AF37 ;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+  }
+  
+  .pagination-controls button:hover {
+    background-color: #F5F5DC; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  .pagination-controls button:disabled {
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+  }
+  
+  .pagination-controls span {
+    margin: 0 10px;
+    font-size: 1.1em;
+    color: #333333;
+  }
+  

@@ -16,10 +16,7 @@ export class ListFilmsResultComponent {
     ngOnInit(): void {
     }
 
-    onClick() {
-        this.eventOut.emit(this.rslt_films.name)
-    }
-
+    // Method to handle click events and navigate to film details page.
     onClickDetail() {
         this.router.navigate(['/film', this.rslt_films.imdbID])
     }

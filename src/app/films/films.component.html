@@ -1,19 +1,27 @@
-<div class="srchBar">
+<!-- Search bar section with input for film name search. -->
+<div  class="srchBar">
+     <!-- Input field for film search -->
     <form [formGroup]="searchForm">
         Enter a film's name : <input formControlName="search" placeholder="search...">
     </form>
+
+     <!-- Conditional error message display based on search input length -->
     <div *ngIf="showErrorMessage" class="error-message">You need at least 3 letters to execute the research...</div>
 </div>
 
+<!-- Container for displaying filtered films. -->
 <div class="padding-25 bg-color-1">
     <div class="row">
         <div *ngIf="filtredFilms.length > 0"  class="col-12 d-flex justify-content-center f-large padding-b-25">
-            <span class="titre">All the films</span>
+            <h1 class="about-title">All the films</h1>
         </div>
+
+        <!-- Container for film results -->
         <div class="col-12 results">
             <ng-container *ngIf="filtredFilms.length > 0">
                 <div class="row">
-                    <div class="col-md-4" *ngFor="let item of filtredFilms">
+                    <!-- Loop through each filtered film and pass it to the list-films-result component -->
+                    <div class="col-md-6" *ngFor="let item of filtredFilms"> 
                         <app-list-films-result [rslt_films]="item" (eventOut)="onEvent($event)"></app-list-films-result>
                     </div>
                 </div>
@@ -22,9 +30,10 @@
     </div>
 </div>
 
-<!-- Pagination Controls -->
+
+<!-- Pagination developing -->
 <div *ngIf="filtredFilms.length > 0" class="pagination-controls">
     <button (click)="onPreviousPage()" [disabled]="currentPage <= 1">Previous</button>
-    <span>Page {{currentPage}}</span>
-    <button (click)="onNextPage()">Next</button>
+    <span class = "about-title" >Page {{currentPage}}</span>
+    <button (click)="onNextPage()" [disabled]="currentPage * 10 >= this.totalResults">Next</button>
 </div>

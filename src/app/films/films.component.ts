@@ -3,6 +3,7 @@ import { FormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { DataService } from '../data.service';
 import { Films } from '../films.interface';
 import { debounce, debounceTime, filter, switchMap } from 'rxjs';
+import { Title } from '@angular/platform-browser';
 import { ListFilmsResultComponent } from '../list-films-result/list-films-result.component';
 
 @Component({
@@ -11,10 +12,11 @@ import { ListFilmsResultComponent } from '../list-films-result/list-films-result
   styleUrls: ['./films.component.css']
 })
 export class FilmsComponent implements OnInit {
+  //   // Using service from angular platform-browser
   
     lastFilm: string = ''
-    allFilms: Films[] = []
-    filtredFilms: Films[] = []
+    allFilms: Films[] = [] // Store all films fetched from the API.
+    filtredFilms: Films[] = [] // Store filtered films based on search.
 
     searchForm: UntypedFormGroup
     searchControl: FormControl<string>
@@ -22,7 +24,15 @@ export class FilmsComponent implements OnInit {
     showErrorMessage: boolean = false;
     currentPage: number = 1;
 
-    constructor(private DataService: DataService) {
+    totalResults: number = 0;
+
+    constructor(private DataService: DataService, private titleService: Title) {
+
+      // Set the page title.
+      this.titleService.setTitle("Film - ISEN Angular");
+
+
+       // Initialize the search form control with validation.
       this.searchControl = new FormControl<string>(
         '',
         {
@@ -36,13 +46,15 @@ export class FilmsComponent implements OnInit {
     }
   
     ngOnInit(): void {
-
+      // Initial API call to fetch films.
       this.DataService.getFilms('abc', this.currentPage).subscribe(
-        (data: any[]) => {
-          this.allFilms = data
+        ({ data, totalResults }) => {
+          this.allFilms = data;
+          this.totalResults = totalResults;
         }
       )
-
+      
+      // Subscribe to value changes of the search control.
       this.searchControl.valueChanges.pipe(
         debounceTime(300),
         switchMap((value: string) => {
@@ -56,30 +68,45 @@ export class FilmsComponent implements OnInit {
           } 
         })
       ).subscribe(
-        (films: Films[]) => this.filtredFilms = films
-      );
-    }
-    
-    onNextPage(): void {
-      this.currentPage++;
-      const searchTerm = this.searchControl.value;
-      console.log(searchTerm);
-      this.DataService.getFilmsContains(searchTerm, this.currentPage).subscribe(
-        (films: Films[]) => this.filtredFilms = films
-        );
+        ({ films, totalResults }) => {
+          this.filtredFilms = films;
+          this.totalResults = totalResults;
+        });
+      
     }
 
+
+    // Method to fetch the next page of film results.
+    onNextPage(): void {
+      if (this.currentPage * 10 <= this.totalResults) {
+        this.currentPage++;
+        const searchTerm = this.searchControl.value;
+        console.log(searchTerm);
+        this.DataService.getFilmsContains(searchTerm, this.currentPage).subscribe(
+          ({ films, totalResults }) => {
+            this.filtredFilms = films;
+            this.totalResults = totalResults;
+          });
+      }
+      
+    }
+
+    // Method to fetch the previous page of film results.
     onPreviousPage(): void {
       if (this.currentPage > 1) {
         this.currentPage--;
         const searchTerm = this.searchControl.value;
-        console.log(searchTerm);
         this.DataService.getFilmsContains(searchTerm, this.currentPage).subscribe(
-        (films: Films[]) => this.filtredFilms = films
-        );
+        ({ films, totalResults }) => {
+          this.filtredFilms = films;
+          this.totalResults = totalResults;
+        });
       }
     }
+
+    // Event handler for custom events.
     onEvent = (event: any) => {
       this.lastFilm = event;
     }
+    
 }

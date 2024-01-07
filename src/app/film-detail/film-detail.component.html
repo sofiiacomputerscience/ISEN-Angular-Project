@@ -1,3 +1,29 @@
-<div *ngIf="film">
-    <h2>{{ film.Title }}</h2>
+<div *ngIf="film" class="film-container">
+    <div class="row">
+        <!-- Movie Poster Section -->
+        <div class="col-md-4">
+            <img *ngIf="film.Poster !== 'N/A'" [src]="film.Poster" class="film-poster" />
+            <img *ngIf="film.Poster === 'N/A'" src="https://t4.ftcdn.net/jpg/04/00/24/31/360_F_400243185_BOxON3h9avMUX10RsDkt3pJ8iQx72kS3.jpg" class="film-poster" />
+        </div>
+
+        <!-- Movie Details Section -->
+        <div class="col-md-8">
+            <h2 class = "about-title">{{ film.Title }} ({{ film.Year }})</h2>
+            <p><span class="label">Rated:</span> {{ film.imbdRating}}</p>
+            <p><span class="label">Released:</span> {{ film.Released }}</p>
+            <p><span class="label">Genre:</span> {{ film.Genre }}</p>
+            <p><span class="label">Director:</span> {{ film.Director }}</p>
+            <p><span class="label">Actors:</span> {{ film.Actors }}</p>
+            <p><span class="label">Country of production:</span> {{ film.Country}}</p>
+            <p><span class="label">Language:</span> {{ film.Language}}</p>
+            <p><span class="label">Runtime:</span> {{ film.Runtime }}</p>
+            <p><span class="label">Awards:</span> {{ film.Awards }}</p>
+        </div>
+    </div>
+
+    <!-- Movie Description Section -->
+    <div class="film-plot">
+        <h5>{{ film.Plot }}</h5>
+    </div>
+
 </div>
