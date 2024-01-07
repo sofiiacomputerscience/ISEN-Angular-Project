@@ -1,27 +1,51 @@
-# Projectname
+# Project README: Movie Data Fetcher in Angular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.8.
+## Introduction
+Welcome to the Movie Data Fetcher, an Angular-based project designed for efficient movie data retrieval from a movie API. This project is the collaborative effort **of two students, Sofiia Boldeskul and Emmanuel Bert.**
 
-## Development server
+## Features
+- Fetches movie information from a movie API ( using all needed elements such as: components, routing, observables, services, interfaces).
+- Utilizes ngx-bootstrap and our own CSS for responsive UI components.
+- Developed by Sofiia Boldeskul and Emmanuel Bert.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Installation
 
-## Code scaffolding
+### Prerequisites
+- Node.js
+- npm (Node Package Manager)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Installing Angular CLI
+1. Install Angular CLI globally:
+   ```
+   npm install -g @angular/cli
+   ```
 
-## Build
+### Setting up the Project
+1. Clone the repository to your local machine.
+2. Navigate to the project directory.
+3. Install required npm packages:
+   ```
+   npm install
+   ```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Running the Project
+1. Start the Angular server:
+   ```
+   ng serve
+   ```
+2. Access the application at `http://localhost:4200/`.
 
-## Running unit tests
+## API Key Configuration
+To access movie data, an API key from OMDb API is required. Obtain your API key from [OMDb API Key](https://www.omdbapi.com/apikey.aspx) and include it in the appropriate place(data.service.ts, line 12) in the project configuration.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## ngx-bootstrap Components
+This project uses ngx-bootstrap for some components to enhance our UI.
+ ```
+   ng add ngx-bootstrap
+   ```
+More information could be find [here](https://www.npmjs.com/package/ngx-bootstrap)
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Contribution
+Developed by Sofiia Boldeskul and Emmanuel Bert for ISEN Angular Course.
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
