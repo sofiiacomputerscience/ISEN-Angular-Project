@@ -8,12 +8,12 @@
   }
   
 p {
-    color: #007bff; /* Change to your preferred color */
+    color: #007bff; 
     margin-bottom: 20px;
-    font-size: 1.1em; /* Slightly larger font size for readability */
-    line-height: 1.6; /* Improved line spacing for better readability */
-    max-width: 800px; /* Set a max-width for better text alignment */
-    margin: auto; /* Center the text block */
+    font-size: 1.1em; 
+    line-height: 1.6; 
+    max-width: 800px; 
+    margin: auto; 
 }
 
 .text-container {
