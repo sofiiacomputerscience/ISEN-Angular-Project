@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { Observable, catchError, map } from 'rxjs';
 import { Films } from './films.interface';
 
 @Injectable({
@@ -12,6 +12,7 @@ export class DataService {
   apiKey = '700bbca8';                                      // apiKey to get from this link : "https://www.omdbapi.com/apikey.aspx"
 
   constructor(private http: HttpClient) { }
+
 
   getFilms(srch: string, page: number ): Observable<Films[]> {
     console.log(this.BaseURL + 'apikey=' + this.apiKey + '&s=' + srch + "*" + '&page=' + page);
@@ -28,12 +29,35 @@ export class DataService {
     ))
   }
 
-  
-
   getFilmsContains(srch: string, page: number): Observable<Films[]> {
-    
     return this.getFilms(srch, page);
   }
 
-  //getbyID(id: string): Observable<Films> {
+  getbyID(id: string): Observable<Films> {
+    
+    return this.http.get(this.BaseURL + 'apikey=' + this.apiKey + '&i=' + id).pipe(
+      map( (data: any) => {
+        return {
+          Title: data.Title,
+          Year: data.Year,
+          imdbID: data.imdbID,
+          Type: data.Type,
+          Poster: data.Poster,
+          Actors: data.Actors,
+          Director: data.Director,
+          Plot: data.Plot,
+          Genre: data.Genre,
+          Language: data.Language,
+          Country: data.Country,
+          Awards: data.Awards,
+          Production: data.Production,
+          Website: data.Website
+        }
+      }),
+      catchError((error: any) => {
+        console.error('Error fetching films:', error);
+        return [];
+      })
+    )
+  }
 }

@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { FilmsComponent } from './films/films.component';
 import { AboutComponent } from './about/about.component';
+import { FilmDetailComponent } from './film-detail/film-detail.component';
 
 
 //Setting up routing for each component of navigation bar 
@@ -12,6 +13,7 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'films', component: FilmsComponent},
   {path: 'about', component: AboutComponent},
+  {path: 'film/:id', component: FilmDetailComponent},
 
   //for any path except the one that we specified above, we will redirect to home component`
   {path: '**', component: HomeComponent, pathMatch: 'full'} 

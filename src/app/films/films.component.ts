@@ -21,7 +21,6 @@ export class FilmsComponent implements OnInit {
 
     showErrorMessage: boolean = false;
     currentPage: number = 1;
-    
 
     constructor(private DataService: DataService) {
       this.searchControl = new FormControl<string>(
@@ -60,7 +59,6 @@ export class FilmsComponent implements OnInit {
         (films: Films[]) => this.filtredFilms = films
       );
     }
-   
     
     onNextPage(): void {
       this.currentPage++;
@@ -84,5 +82,4 @@ export class FilmsComponent implements OnInit {
     onEvent = (event: any) => {
       this.lastFilm = event;
     }
-
 }

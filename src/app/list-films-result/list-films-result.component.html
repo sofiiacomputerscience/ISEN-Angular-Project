@@ -1,5 +1,5 @@
 <div class="row">
-    <div *ngIf="rslt_films.Poster == 'N/A' " class="col-12 d-flex justify-content-center"  > 
+    <div *ngIf="rslt_films.Poster === 'N/A' " class="col-12 d-flex justify-content-center"  > 
         <img class="grows" src="https://t4.ftcdn.net/jpg/04/00/24/31/360_F_400243185_BOxON3h9avMUX10RsDkt3pJ8iQx72kS3.jpg" height="200px" />
     </div>
     <div *ngIf="rslt_films.Poster !== 'N/A' " class="col-12 d-flex justify-content-center">
@@ -10,4 +10,3 @@
         <button (click)="onClickDetail()" class="btn btn-light">See the details</button>
     </div>
 </div>
-
