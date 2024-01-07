@@ -13,6 +13,7 @@ import { AboutComponent } from './about/about.component';
 import { FooterComponent } from './footer/footer.component';
 import { FilmsComponent } from './films/films.component';
 import { ListFilmsResultComponent } from './list-films-result/list-films-result.component';
+import { FilmDetailComponent } from './film-detail/film-detail.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { ListFilmsResultComponent } from './list-films-result/list-films-result.
     AboutComponent,
     FooterComponent,
     FilmsComponent,
-    ListFilmsResultComponent
+    ListFilmsResultComponent,
+    FilmDetailComponent
   ],
   imports: [
     BrowserModule,

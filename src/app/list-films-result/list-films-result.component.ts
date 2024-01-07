@@ -21,7 +21,7 @@ export class ListFilmsResultComponent {
     }
 
     onClickDetail() {
-        this.router.navigate(['/films', this.rslt_films.id, 'detail'])
+        this.router.navigate(['/film', this.rslt_films.imdbID])
     }
 
     ngOnDestroy(): void {

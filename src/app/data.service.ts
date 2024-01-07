@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { Observable, catchError, map } from 'rxjs';
 import { Films } from './films.interface';
 
 @Injectable({
@@ -28,9 +28,34 @@ export class DataService {
   }
 
   getFilmsContains(srch: string): Observable<Films[]> {
-    // Utilisation du paramètre 's' pour obtenir les résultats qui contiennent la chaîne spécifiée
     return this.getFilms(srch);
   }
 
-  //getbyID(id: string): Observable<Films> {
+  getbyID(id: string): Observable<Films> {
+    
+    return this.http.get(this.BaseURL + 'apikey=' + this.apiKey + '&i=' + id).pipe(
+      map( (data: any) => {
+        return {
+          Title: data.Title,
+          Year: data.Year,
+          imdbID: data.imdbID,
+          Type: data.Type,
+          Poster: data.Poster,
+          Actors: data.Actors,
+          Director: data.Director,
+          Plot: data.Plot,
+          Genre: data.Genre,
+          Language: data.Language,
+          Country: data.Country,
+          Awards: data.Awards,
+          Production: data.Production,
+          Website: data.Website
+        }
+      }),
+      catchError((error: any) => {
+        console.error('Error fetching films:', error);
+        return [];
+      })
+    )
+  }
 }
